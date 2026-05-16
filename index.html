@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matters — Release what's weighing on you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --rose: #E8C4B8;
+    --rose-deep: #C4826A;
+    --brown: #8B5E52;
+    --brown-dark: #5C3D35;
+    --sage: #B5C4B1;
+    --text-dark: #2C1810;
+    --text-mid: #6B4C42;
+    --text-light: #9B7B72;
+    --border: rgba(139,94,82,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(250,247,242,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text-dark); }
+
+  .btn-nav {
+    background: var(--brown-dark) !important;
+    color: var(--warm-white) !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 100px !important;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8rem 3rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(232,196,184,0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(181,196,177,0.2) 0%, transparent 60%),
+                radial-gradient(ellipse 30% 30% at 80% 20%, rgba(232,196,184,0.2) 0%, transparent 60%);
+  }
+
+  .hero-content { position: relative; max-width: 680px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(232,196,184,0.4);
+    border: 1px solid rgba(196,130,106,0.3);
+    border-radius: 100px;
+    padding: 0.375rem 1rem;
+    font-size: 0.8rem;
+    color: var(--brown);
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-heart {
+    width: 10px; height: 10px;
+    background: var(--rose-deep);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em { font-style: italic; color: var(--rose-deep); }
+
+  .hero-sub {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--text-mid);
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .hero-cta {
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--brown-dark);
+    color: var(--warm-white);
+    border: none;
+    border-radius: 100px;
+    padding: 0.875rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--brown); transform: translateY(-1px); }
+
+  .btn-ghost {
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--text-dark); }
+
+  .hero-note { margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-light); }
+
+  .floating-cards {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .float-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 24px rgba(92,61,53,0.06);
+  }
+
+  .float-card:nth-child(2) { margin-top: 2rem; }
+  .float-card:nth-child(3) { margin-top: -1rem; }
+
+  .card-tag { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.75rem; }
+
+  .card-mood {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(232,196,184,0.3);
+    border-radius: 100px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--brown);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-body {
+    font-family: 'Fraunces', serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .card-reflection { font-size: 0.8rem; line-height: 1.6; color: var(--text-mid); padding-top: 0.75rem; border-top: 1px solid var(--border); }
+
+  .card-insight { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .insight-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; }
+  .insight-label { color: var(--text-mid); }
+  .insight-val { font-weight: 500; color: var(--text-dark); }
+  .insight-bar-wrap { height: 4px; background: rgba(139,94,82,0.1); border-radius: 2px; flex: 1; margin: 0 0.75rem; }
+  .insight-bar { height: 100%; border-radius: 2px; background: var(--rose-deep); }
+
+  section { padding: 6rem 3rem; }
+
+  .section-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose-deep); margin-bottom: 1rem; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-dark);
+    margin-bottom: 1.25rem;
+  }
+
+  h2 em { font-style: italic; color: var(--rose-deep); }
+
+  .section-sub { font-size: 1rem; line-height: 1.7; color: var(--text-mid); font-weight: 300; max-width: 500px; }
+
+  .features { background: var(--warm-white); }
+
+  .features-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .feature-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 2.5rem; }
+  .feature-item { display: flex; gap: 1.25rem; align-items: flex-start; }
+
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(232,196,184,0.3);
+    border: 1px solid rgba(196,130,106,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1rem;
+  }
+
+  .feature-text h3 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 400; color: var(--text-dark); margin-bottom: 0.25rem; }
+  .feature-text p { font-size: 0.875rem; line-height: 1.6; color: var(--text-mid); font-weight: 300; }
+
+  .phone-mock { background: var(--text-dark); border-radius: 40px; padding: 1.5rem; box-shadow: 0 20px 60px rgba(44,24,16,0.15); max-width: 280px; margin: 0 auto; }
+  .phone-screen { background: var(--cream); border-radius: 28px; padding: 1.5rem; min-height: 400px; display: flex; flex-direction: column; gap: 1rem; }
+  .phone-header { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; color: var(--text-dark); }
+  .phone-greeting { font-size: 0.7rem; color: var(--text-light); }
+  .mood-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+  .mood-pill { padding: 0.25rem 0.6rem; border-radius: 100px; font-size: 0.65rem; border: 1px solid var(--border); color: var(--text-mid); background: var(--warm-white); }
+  .mood-pill.active { background: var(--rose-deep); color: white; border-color: var(--rose-deep); }
+  .phone-textarea { background: var(--warm-white); border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; color: var(--text-dark); line-height: 1.5; min-height: 80px; }
+  .phone-slider-label { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-light); }
+  .phone-slider-track { height: 4px; background: rgba(139,94,82,0.1); border-radius: 2px; margin: 0.4rem 0; position: relative; }
+  .phone-slider-fill { position: absolute; left: 0; top: 0; height: 100%; width: 70%; background: var(--rose-deep); border-radius: 2px; }
+  .phone-btn { background: var(--brown-dark); color: white; border-radius: 100px; padding: 0.6rem; text-align: center; font-size: 0.75rem; font-weight: 500; margin-top: auto; }
+
+  .how { max-width: 900px; margin: 0 auto; text-align: center; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; text-align: left; }
+
+  .step { padding: 1.75rem; background: var(--warm-white); border: 1px solid var(--border); border-radius: 20px; }
+  .step-num { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 300; color: rgba(196,130,106,0.3); line-height: 1; margin-bottom: 1rem; }
+  .step h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; color: var(--text-dark); margin-bottom: 0.5rem; }
+  .step p { font-size: 0.85rem; line-height: 1.6; color: var(--text-mid); font-weight: 300; }
+
+  .safety { background: var(--warm-white); }
+  .safety-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .safety-points { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem; }
+  .safety-point { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.875rem; line-height: 1.6; color: var(--text-mid); }
+  .safety-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose-deep); flex-shrink: 0; margin-top: 0.4rem; }
+
+  .crisis-card { background: rgba(232,196,184,0.2); border: 1px solid rgba(196,130,106,0.2); border-radius: 20px; padding: 1.75rem; }
+  .crisis-card h3 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 400; color: var(--text-dark); margin-bottom: 1rem; }
+  .crisis-line { font-size: 0.8rem; color: var(--text-mid); line-height: 1.6; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .crisis-line:last-child { border-bottom: none; }
+  .crisis-num { font-weight: 500; color: var(--rose-deep); }
+
+  .cta-section { text-align: center; max-width: 600px; margin: 0 auto; }
+  .cta-section h2 { margin-bottom: 1rem; }
+  .cta-section p { font-size: 1rem; color: var(--text-mid); font-weight: 300; line-height: 1.7; margin-bottom: 2rem; }
+
+  footer { padding: 3rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; color: var(--text-dark); }
+  .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.8rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text-dark); }
+  .footer-copy { font-size: 0.75rem; color: var(--text-light); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp 0.7s ease forwards; opacity: 0; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .floating-cards { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .float-card:nth-child(2), .float-card:nth-child(3) { margin-top: 0; }
+    .features-inner, .safety-inner, .steps { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">🤍 Matters</div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#safety">Safety</a>
+    <a href="https://app.thematterscompany.com" class="btn-nav">Get started</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up"><span class="hero-heart"></span> A space just for you</div>
+    <h1 class="fade-up delay-1">Release what's<br><em>weighing on you.</em></h1>
+    <p class="hero-sub fade-up delay-2">Matters is a private space to express what's heavy, receive a gentle reflection, and find patterns in how you feel — no filters, no judgment.</p>
+    <div class="hero-cta fade-up delay-3">
+      <a href="https://app.thematterscompany.com" class="btn-primary">Start for free</a>
+      <a href="#how" class="btn-ghost">See how it works</a>
+    </div>
+    <p class="hero-note fade-up delay-4">Free to use · Private by design · Not a therapy service</p>
+  </div>
+</section>
+
+<div class="floating-cards">
+  <div class="float-card">
+    <div class="card-tag">Express it</div>
+    <div class="card-mood">😔 Stressed</div>
+    <p class="card-body">"I feel like I'm not making progress no matter how hard I try."</p>
+    <p class="card-reflection">The weight of feeling stuck while pushing hard — that's exhausting. You're not standing still. You're carrying more than most people see.</p>
+  </div>
+  <div class="float-card">
+    <div class="card-tag">Your insights</div>
+    <div class="card-insight">
+      <p style="font-family:'Fraunces',serif;font-size:0.85rem;font-weight:300;color:var(--text-dark);margin-bottom:0.5rem;">You tend to check in during the evening 🌆</p>
+      <div class="insight-row"><span class="insight-label">Stressed</span><div class="insight-bar-wrap"><div class="insight-bar" style="width:80%"></div></div><span class="insight-val">8</span></div>
+      <div class="insight-row"><span class="insight-label">Anxious</span><div class="insight-bar-wrap"><div class="insight-bar" style="width:50%"></div></div><span class="insight-val">5</span></div>
+      <div class="insight-row"><span class="insight-label">Hopeful</span><div class="insight-bar-wrap"><div class="insight-bar" style="width:30%;background:var(--sage)"></div></div><span class="insight-val">3</span></div>
+      <p style="font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;">2.0 points lighter after expressing 🤍</p>
+    </div>
+  </div>
+  <div class="float-card">
+    <div class="card-tag">Explore further</div>
+    <p style="font-size:0.8rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.75rem;"><strong style="color:var(--text-dark);font-weight:500;">Matters:</strong> What part of this feels heaviest right now?</p>
+    <p style="font-size:0.8rem;color:var(--brown);line-height:1.6;margin-bottom:0.75rem;background:rgba(232,196,184,0.2);padding:0.5rem 0.75rem;border-radius:10px;">The part where I feel invisible, like my effort doesn't count.</p>
+    <p style="font-size:0.8rem;color:var(--text-mid);line-height:1.6;"><strong style="color:var(--text-dark);font-weight:500;">Matters:</strong> That feeling of invisibility — how long have you been carrying it?</p>
+    <p style="font-size:0.7rem;color:var(--text-light);margin-top:0.75rem;">Live only · private by design 🔒</p>
+  </div>
+</div>
+
+<section id="how">
+  <div class="how">
+    <p class="section-label">How it works</p>
+    <h2>Simple. Private. <em>Human.</em></h2>
+    <p class="section-sub" style="margin:0 auto;">No lengthy sign-ups, no mood trackers that feel like homework. Just a space to put it down.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Express it</h3><p>Write what's on your mind — raw, unfiltered, whatever needs to come out. Pick a mood and how heavy it feels.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Receive a reflection</h3><p>A gentle AI reflection meets you where you are — no advice, no diagnosis. Just acknowledgment that what you feel is real.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Go deeper if you want</h3><p>Explore what came up in a private AI conversation, find calm with breathing exercises, or simply close the app lighter than you opened it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-inner">
+    <div>
+      <p class="section-label">What's inside</p>
+      <h2>Everything you need.<br><em>Nothing you don't.</em></h2>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-icon">💬</div><div class="feature-text"><h3>Express it</h3><p>Release what's weighing on you in a private, judgment-free space. Get a warm AI reflection back.</p></div></div>
+        <div class="feature-item"><div class="feature-icon">📓</div><div class="feature-text"><h3>Journal</h3><p>When you need more space to process, the journal goes deeper. Same privacy, more room.</p></div></div>
+        <div class="feature-item"><div class="feature-icon">🌿</div><div class="feature-text"><h3>Find calm</h3><p>Breathing exercises, grounding techniques, and body scans — for when things feel too heavy to think.</p></div></div>
+        <div class="feature-item"><div class="feature-icon">📊</div><div class="feature-text"><h3>Insights</h3><p>Discover patterns you haven't noticed — when you feel heaviest, what shifts your mood, and how far you've come.</p></div></div>
+      </div>
+    </div>
+    <div class="phone-mock">
+      <div class="phone-screen">
+        <div>
+          <div class="phone-greeting">Good evening 🌆</div>
+          <div class="phone-header">Welcome back 🤍</div>
+          <div class="phone-greeting" style="margin-top:2px;">How are you carrying things today?</div>
+        </div>
+        <div>
+          <div class="phone-greeting" style="margin-bottom:6px;">How are you feeling?</div>
+          <div class="mood-pills">
+            <span class="mood-pill active">😔 Stressed</span>
+            <span class="mood-pill">😢 Sad</span>
+            <span class="mood-pill">😰 Anxious</span>
+            <span class="mood-pill">😶 Numb</span>
+          </div>
+        </div>
+        <div class="phone-textarea">I have been feeling overwhelmed at work and I don't know how to ask for help...</div>
+        <div>
+          <div class="phone-slider-label"><span>How heavy?</span><span style="color:var(--rose-deep);font-weight:500;">7/10</span></div>
+          <div class="phone-slider-track"><div class="phone-slider-fill"></div></div>
+          <div class="phone-slider-label"><span>Light</span><span>Heavy</span></div>
+        </div>
+        <div class="phone-btn">Release this</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="safety">
+  <div class="safety-inner" style="max-width:800px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+    <div>
+      <p class="section-label">Built with care</p>
+      <h2>Your privacy is<br><em>not negotiable.</em></h2>
+      <div class="safety-points">
+        <div class="safety-point"><div class="safety-dot"></div><span>Your entries are private by default. Only you can see them — ever.</span></div>
+        <div class="safety-point"><div class="safety-dot"></div><span>AI conversations are live only and deleted forever when you close them, unless you choose to save them.</span></div>
+        <div class="safety-point"><div class="safety-dot"></div><span>We never sell your data, use it for advertising, or train AI models on your personal content.</span></div>
+        <div class="safety-point"><div class="safety-dot"></div><span>Matters is not a therapy service. We're honest about what we are and what we're not.</span></div>
+        <div class="safety-point"><div class="safety-dot"></div><span>Crisis detection built in — if something urgent comes up, we surface real human support immediately.</span></div>
+      </div>
+    </div>
+    <div class="crisis-card">
+      <h3>If you're in crisis right now</h3>
+      <div class="crisis-line"><span class="crisis-num">988</span> Suicide & Crisis Lifeline<br><span style="color:var(--text-light);font-size:0.75rem;">Call or text — free, 24/7</span></div>
+      <div class="crisis-line">Crisis Text Line<br><span style="color:var(--text-light);font-size:0.75rem;">Text HOME to <span class="crisis-num">741741</span></span></div>
+      <div class="crisis-line">Emergency services<br><span style="color:var(--text-light);font-size:0.75rem;">Call <span class="crisis-num">911</span> if in immediate danger</span></div>
+      <p style="font-size:0.75rem;color:var(--text-light);margin-top:1rem;line-height:1.6;">You don't have to carry this alone. 🤍</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="cta-section">
+    <p class="section-label">Get started</p>
+    <h2>Whatever brought you here —<br><em>we're glad you're here.</em></h2>
+    <p>Matters is free to start. No credit card. No long sign-up. Just a space that's yours.</p>
+    <a href="https://app.thematterscompany.com" class="btn-primary">Start expressing →</a>
+    <p style="font-size:0.8rem;color:var(--text-light);margin-top:1rem;">By signing up you agree to our <a href="/terms" style="color:var(--text-mid);">Terms</a> and <a href="/privacy" style="color:var(--text-mid);">Privacy Policy</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">🤍 Matters</div>
+  <div class="footer-links">
+    <a href="#how">How it works</a>
+    <a href="#safety">Safety</a>
+    <a href="/terms">Terms</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="mailto:support@thematterscompany.com">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 The Matters Company · California</div>
+</footer>
+
+</body>
+</html>
