@@ -105,22 +105,29 @@
     letter-spacing: 0.01em;
   }
   .nav-links a:hover { color: var(--text-dark); }
+  /* btn-nav overrides .nav-links a — dual selector for specificity */
+  .nav-links a.btn-nav,
   .btn-nav {
     font-family: var(--font-body);
     font-size: 0.875rem;
-    font-weight: 500;
-    background: #7A4F44;
-    color: #FFFFFF;
+    font-weight: 600;
+    background: #7A4F44 !important;
+    color: #FFFFFF !important;
     border: none;
-    padding: 0.6rem 1.4rem;
+    padding: 0.6rem 1.5rem;
     border-radius: 100px;
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: none !important;
     transition: background 0.2s, transform 0.15s;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
     -webkit-font-smoothing: antialiased;
   }
-  .btn-nav:hover { background: #8B5E52; transform: translateY(-1px); }
+  .nav-links a.btn-nav:hover,
+  .btn-nav:hover {
+    background: #9A6A5A !important;
+    color: #FFFFFF !important;
+    transform: translateY(-1px);
+  }
 
   /* ── HERO ── */
   .hero {
@@ -795,7 +802,7 @@
     <a href="https://app.thematterscompany.com/terms">Terms of Service</a>
     <a href="mailto:hello@thematterscompany.com">Contact</a>
   </div>
-  <p class="footer-copy">© 2025 The Matters Company</p>
+  <p class="footer-copy">© 2026 The Matters Company · California</p>
 </footer>
 
 <script>
