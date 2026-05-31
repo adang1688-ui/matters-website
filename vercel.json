@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/terms",
+      "destination": "https://app.thematterscompany.com/terms",
+      "permanent": false
+    },
+    {
+      "source": "/privacy",
+      "destination": "https://app.thematterscompany.com/privacy",
+      "permanent": false
+    },
+    {
+      "source": "/faq",
+      "destination": "https://app.thematterscompany.com/faq",
+      "permanent": false
+    }
+  ]
+}
