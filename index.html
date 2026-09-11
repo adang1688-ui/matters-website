@@ -353,6 +353,111 @@
     line-height: 1.6;
   }
 
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .price-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .price-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(44,24,16,0.08); }
+  .price-card.featured { border-color: var(--rose-deep); }
+  .price-badge {
+    display: inline-block;
+    width: fit-content;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-light);
+    background: rgba(139,94,82,0.08);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .price-name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.375rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+  .price-amount {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 2.25rem;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+    line-height: 1;
+  }
+  .price-amount span {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--text-mid);
+    font-weight: 400;
+  }
+  .price-note {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+  .price-desc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--text-mid);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  .price-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+  .price-features li {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--text-mid);
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .price-features li::before {
+    content: '✓';
+    color: var(--rose-deep);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .price-cta {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .price-cta.primary { background: #7A4F44; color: #FFFFFF; }
+  .price-cta.primary:hover { background: #8B5E52; transform: translateY(-2px); }
+  .price-cta.ghost { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+  .price-cta.ghost:hover { border-color: var(--rose-deep); color: var(--text-dark); }
+  .price-cta.disabled { background: transparent; color: var(--text-light); border: 1px solid var(--border); cursor: default; pointer-events: none; }
+
   /* SAFETY */
   .safety-section {
     background: var(--warm-white);
@@ -510,6 +615,7 @@
   <div class="nav-links">
     <a href="#how-it-works">How it works</a>
     <a href="#safety">Safety</a>
+    <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
     <a href="https://app.thematterscompany.com" class="btn-nav">Get started</a>
   </div>
@@ -529,7 +635,7 @@
     <a href="#how-it-works" class="btn-ghost">See how it works</a>
   </div>
   <p class="hero-footnote">
-    Free to use <span>·</span> Private by design <span>·</span> Not a therapy service
+    Free to start <span>·</span> Private by design <span>·</span> Not a therapy service
   </p>
 </section>
 
@@ -592,6 +698,53 @@
       <div class="feature-icon">🛟</div>
       <div class="feature-title">Resources</div>
       <p class="feature-desc">Crisis lines and support services — always one tap away, never buried behind a paywall.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="pricing">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title">Free to start. Simple to grow.</h2>
+  <p class="section-subtitle">Matters is free to use. Matters+ unlocks deeper reflection for people who want more.</p>
+  <div class="pricing-grid">
+    <div class="price-card fade-up">
+      <div class="price-name">Free</div>
+      <div class="price-amount">$0</div>
+      <p class="price-desc">Everything you need to begin releasing what's on your mind.</p>
+      <ul class="price-features">
+        <li>Unlimited entries and mood check-ins</li>
+        <li>5 Wren sessions a month</li>
+        <li>Current week of mood history</li>
+        <li>Crisis resources, always free</li>
+      </ul>
+      <a href="https://app.thematterscompany.com" class="price-cta ghost">Start for free</a>
+    </div>
+    <div class="price-card featured fade-up" style="transition-delay: 0.1s">
+      <div class="price-name">Matters+</div>
+      <div class="price-amount">$6.99<span> / month</span></div>
+      <p class="price-note">or $59.99 billed yearly, about $5/month</p>
+      <p class="price-desc">Unlimited space to process, and the full picture over time.</p>
+      <ul class="price-features">
+        <li>Unlimited Wren sessions</li>
+        <li>Custom categories</li>
+        <li>Full history and trends</li>
+        <li>Export your entries anytime</li>
+      </ul>
+      <a href="https://app.thematterscompany.com" class="price-cta primary">Upgrade to Matters+</a>
+    </div>
+    <div class="price-card fade-up" style="transition-delay: 0.2s">
+      <div class="price-badge">Coming soon</div>
+      <div class="price-name">Pro</div>
+      <p class="price-desc">For deeper support, guided reflection, and community.</p>
+      <ul class="price-features">
+        <li>Community support circles</li>
+        <li>Deeper pattern insights</li>
+        <li>Guided reflection prompts</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#" class="price-cta disabled">Coming soon</a>
     </div>
   </div>
 </section>
@@ -674,7 +827,7 @@
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFAQ(this)">Is it really free?<span class="faq-chevron">+</span></button>
-      <div class="faq-a">Yes. Matters is free to use during our current beta period. People who join now will be recognised as founding members when we introduce optional paid features in the future.</div>
+      <div class="faq-a">Matters is free to use, with 5 Wren sessions a month. Matters+ unlocks unlimited sessions, custom categories, full history, and data export for $6.99 a month or $59.99 a year.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFAQ(this)">What if I'm in crisis?<span class="faq-chevron">+</span></button>
