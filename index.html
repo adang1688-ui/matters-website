@@ -242,6 +242,15 @@
     letter-spacing: 0.02em;
   }
   .hero-footnote span { margin: 0 0.4rem; }
+  .company-line {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin-top: 0.75rem;
+    letter-spacing: 0.01em;
+  }
 
   /* HOW IT WORKS */
   .section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
@@ -606,6 +615,22 @@
   .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Wrenly, Inc.",
+  "legalName": "Wrenly, Inc.",
+  "url": "https://thematterscompany.com",
+  "email": "hello@thematterscompany.com",
+  "description": "Wrenly, Inc. is a Delaware corporation that makes Matters, an AI for emotional wellness.",
+  "brand": { "@type": "Brand", "name": "Matters" },
+  "sameAs": [
+    "https://www.linkedin.com/company/matters-app",
+    "https://www.instagram.com/thematterscompany"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -638,6 +663,7 @@
   <p class="hero-footnote">
     Free to start <span>·</span> Private by design <span>·</span> Not a therapy service
   </p>
+  <p class="company-line">Matters is a product of Wrenly, Inc., a Delaware corporation.</p>
 </section>
 
 <section class="section" id="how-it-works">
@@ -875,7 +901,7 @@
     <a href="https://app.thematterscompany.com/terms">Terms of Service</a>
     <a href="mailto:hello@thematterscompany.com">Contact</a>
   </div>
-  <p class="footer-copy">© 2026 Wrenly, Inc. Matters™ is a trademark of Wrenly, Inc.</p>
+  <p class="footer-copy">© 2026 Wrenly, Inc., a Delaware corporation. Matters™ is a trademark of Wrenly, Inc.</p>
 </footer>
 
 <script>
