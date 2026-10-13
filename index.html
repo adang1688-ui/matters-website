@@ -163,14 +163,14 @@
     background: var(--rose-deep);
     border-radius: 50%;
   }
-  .hero-headline { margin-bottom: 1.75rem; max-width: 800px; }
+  .hero-headline { margin-bottom: 1.75rem; max-width: 1000px; }
 
   /* Hero line 1: Playfair Display upright */
   .hero-line-1 {
     font-family: var(--font-display);
     font-weight: 400;
     font-style: normal;
-    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-size: clamp(2.25rem, 5vw, 4rem);
     line-height: 1.05;
     color: var(--text-dark);
     display: block;
@@ -181,7 +181,7 @@
     font-family: var(--font-display);
     font-weight: 400;
     font-style: normal;
-    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-size: clamp(2.25rem, 5vw, 4rem);
     line-height: 1.05;
     color: var(--rose-deep);
     display: block;
@@ -234,6 +234,27 @@
     letter-spacing: 0.01em;
   }
   .btn-ghost:hover { color: var(--text-dark); }
+  .hero-carousel { display: grid; width: 100%; max-width: 1000px; margin: 0 auto; position: relative; }
+  .hero-slide {
+    grid-area: 1 / 1;
+    display: flex; flex-direction: column; align-items: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.7s ease, visibility 0.7s;
+  }
+  .hero-slide.active { opacity: 1; visibility: visible; }
+  .hero-slide .hero-subtext { margin: 0 auto; }
+  .hero-dots { display: flex; gap: 0.25rem; justify-content: center; margin: 1.75rem 0 2.25rem; }
+  .hero-dot {
+    width: 28px; height: 28px; border: none; background: none; cursor: pointer; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-dot::before {
+    content: ''; display: block; width: 8px; height: 8px; border-radius: 100px;
+    background: rgba(139,94,82,0.25); transition: width 0.25s, background 0.25s;
+  }
+  .hero-dot.active::before { width: 24px; background: var(--rose-deep); }
+  .hero-dot:focus-visible { outline: 2px solid var(--rose-deep); outline-offset: 2px; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) { .hero-slide { transition: none; } }
   .hero-footnote {
     font-family: var(--font-body);
     font-size: 0.8125rem;
@@ -320,6 +341,29 @@
     color: var(--text-mid);
     line-height: 1.65;
   }
+
+  .steps-2 { grid-template-columns: repeat(2, 1fr); }
+  .step-try {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--rose-deep);
+    margin-top: 1rem;
+    line-height: 1.5;
+  }
+  .resources-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 1.75rem 2rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--warm-white);
+  }
+  .resources-strip .price-cta { padding: 0.75rem 1.75rem; white-space: nowrap; }
 
   /* DIVIDER */
   .divider { width: 100%; height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
@@ -606,6 +650,7 @@
     .section { padding: 4rem 1.5rem; }
     .safety-section { padding: 2.5rem 1.5rem; }
     .safety-grid { grid-template-columns: 1fr; }
+    .steps-2 { grid-template-columns: 1fr; }
     footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     .hero-actions { flex-direction: column; }
     .btn-primary, .btn-ghost { width: 100%; text-align: center; }
@@ -639,8 +684,8 @@
     <img src="Matters_Logo2_App.png" alt="Matters">
   </a>
   <div class="nav-links">
-    <a href="#how-it-works">How it works</a>
     <a href="#safety">Safety</a>
+    <a href="#how-it-works">How it works</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
     <a href="https://app.thematterscompany.com" class="btn-nav">Get started</a>
@@ -649,98 +694,142 @@
 
 <section class="hero">
   <div class="hero-badge">AI for emotional wellness</div>
-  <div class="hero-headline">
-    <span class="hero-line-1">Release what's</span>
-    <span class="hero-line-2">weighing on you.</span>
+  <div class="hero-carousel" id="heroCarousel" aria-roledescription="carousel" aria-label="Moments Matters is built for">
+    <div class="hero-slide active" role="group" aria-roledescription="slide" aria-label="1 of 4">
+      <div class="hero-headline">
+        <span class="hero-line-1">Something weighing on you?</span>
+        <span class="hero-line-2">Now you can release it.</span>
+      </div>
+      <p class="hero-subtext">Matters gives you a private place to say it, by typing or speaking, and a gentle reflection back. No filters. No judgment.</p>
+    </div>
+    <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+      <div class="hero-headline">
+        <span class="hero-line-1">No outlet for it?</span>
+        <span class="hero-line-2">Now you can express it.</span>
+      </div>
+      <p class="hero-subtext">Put it down the moment it happens, in a word or a paragraph, instead of carrying it until it builds.</p>
+    </div>
+    <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+      <div class="hero-headline">
+        <span class="hero-line-1">Afraid to be judged?</span>
+        <span class="hero-line-2">Now you can say it privately.</span>
+      </div>
+      <p class="hero-subtext">Your entries are private to your account, and Wren, our AI guide, listens without judging you.</p>
+    </div>
+    <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+      <div class="hero-headline">
+        <span class="hero-line-1">Can't find the words?</span>
+        <span class="hero-line-2">Now you can start small.</span>
+      </div>
+      <p class="hero-subtext">One word is enough. Type it or speak it, and Wren reflects it back so you can see what is going on.</p>
+    </div>
   </div>
-  <p class="hero-subtext">
-    Matters is a private space to express what's heavy, receive a gentle reflection, and find patterns in how you feel. No filters, no judgment.
-  </p>
+  <div class="hero-dots" id="heroDots">
+    <button type="button" class="hero-dot active" aria-label="Show moment 1"></button>
+    <button type="button" class="hero-dot" aria-label="Show moment 2"></button>
+    <button type="button" class="hero-dot" aria-label="Show moment 3"></button>
+    <button type="button" class="hero-dot" aria-label="Show moment 4"></button>
+  </div>
   <div class="hero-actions">
-    <a href="https://app.thematterscompany.com" class="btn-primary">Start for free</a>
+    <a href="https://app.thematterscompany.com" class="btn-primary">Start here</a>
     <a href="#how-it-works" class="btn-ghost">See how it works</a>
   </div>
   <p class="hero-footnote">
-    Free to start <span>·</span> Private by design <span>·</span> Not a therapy service
+    Not a therapy service
   </p>
   <p class="company-line">Matters is a product of Wrenly, Inc., a Delaware corporation.</p>
 </section>
 
-<section class="section" id="how-it-works">
-  <p class="section-label">How it works</p>
-  <h2 class="section-title">Three gentle steps.</h2>
-  <p class="section-subtitle">No setup, no prompts, no pressure. Just a quiet place to put down what you've been carrying.</p>
-  <div class="steps">
-    <div class="step-card fade-up">
-      <div class="step-number">01</div>
-      <div class="step-title">Express it</div>
-      <p class="step-desc">Speak it or type it, from a single word to everything on your mind. There's no wrong way to start.</p>
-    </div>
-    <div class="step-card fade-up" style="transition-delay: 0.1s">
-      <div class="step-number">02</div>
-      <div class="step-title">Receive a reflection</div>
-      <p class="step-desc">Wren, the AI guide inside Matters, offers a gentle, non-judgmental reflection. Not advice, just a space to be heard.</p>
-    </div>
-    <div class="step-card fade-up" style="transition-delay: 0.2s">
-      <div class="step-number">03</div>
-      <div class="step-title">Understand your patterns</div>
-      <p class="step-desc">Over time, Insights helps you notice what's weighing on you most: moods, themes, and the times you carry the most.</p>
+<section class="section" id="safety">
+  <div class="safety-section fade-up">
+    <p class="section-label">Privacy &amp; Safety</p>
+    <h2 class="section-title" style="margin-bottom: 0.5rem;">Your words are yours.</h2>
+    <p class="section-subtitle" style="margin-bottom: 2rem;">An AI for emotional topics raises fair worries. Here are straight answers, including what we can't promise yet. We're a small team building this carefully, and we'll say so here when our protections improve.</p>
+    <div class="safety-grid">
+      <div class="safety-item">
+        <div class="safety-dot"></div>
+        <div>
+          <div class="safety-label">Who sees what I write?</div>
+          <p class="safety-desc">Your entries, moods, and reflections are encrypted at rest in our database and private to your account. We never sell your data. Text you send to Wren goes to Anthropic to write a reply. If you use voice, OpenAI turns your speech into a transcript. Matters does not save the audio.</p>
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-dot"></div>
+        <div>
+          <div class="safety-label">Is this a replacement for therapy?</div>
+          <p class="safety-desc">No. Wren is an AI guide, not a therapist, a counselor, or a crisis service. Matters is a space for private reflection, not a clinical tool.</p>
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-dot"></div>
+        <div>
+          <div class="safety-label">What if I'm in crisis?</div>
+          <p class="safety-desc">The Resources tab is always free and lists crisis lines for the US, UK, Canada, Australia, and an international directory. In the US or Canada, call or text 988. Wren is built to point you to real support when it notices signs of distress. Safety checks work in English today. Other languages are in progress.</p>
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-dot"></div>
+        <div>
+          <div class="safety-label">Has a professional reviewed it?</div>
+          <p class="safety-desc">Not yet. We'll say so here when that changes. Matters is a self-reflection tool, not a substitute for professional care.</p>
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-dot"></div>
+        <div>
+          <div class="safety-label">Can I delete it?</div>
+          <p class="safety-desc">Yes, anytime. You can delete your entries or your entire account. When you delete, it's removed from your account. Backups may keep it for a limited time.</p>
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-dot"></div>
+        <div>
+          <div class="safety-label">Who is it for?</div>
+          <p class="safety-desc">Adults 18 and older. If you are in crisis or worried about your safety, please reach out to a real person. Matters is not a crisis service.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<section class="section" id="features">
-  <p class="section-label">What's inside</p>
-  <h2 class="section-title">Built for how you actually feel.</h2>
-  <p class="section-subtitle">Every feature is designed to create space, not fill it with noise.</p>
-  <div class="features-grid">
-    <div class="feature-item fade-up">
-      <div class="feature-icon">🌿</div>
-      <div class="feature-title">Express it</div>
-      <p class="feature-desc">Choose from 55+ feelings across five groups, add as much or as little context as you want.</p>
+<section class="section" id="how-it-works">
+  <p class="section-label">What you can do</p>
+  <h2 class="section-title">Start anywhere. Here's the path.</h2>
+  <p class="section-subtitle">Four things to try, in the order most people find useful. No setup, no pressure.</p>
+  <div class="steps steps-2">
+    <div class="step-card fade-up">
+      <div class="step-number">01</div>
+      <div class="step-title">Express it</div>
+      <p class="step-desc">Say what's weighing on you. Type it, speak it, or write it in your journal. One word is enough to start. Voice works in English today, and other languages are in progress. Matters does not save the audio.</p>
+      <p class="step-try">Try it: put down whatever is on your mind right now.</p>
     </div>
-    <div class="feature-item fade-up" style="transition-delay: 0.05s">
-      <div class="feature-icon">🤍</div>
-      <div class="feature-title">Wren reflection</div>
-      <p class="feature-desc">A warm, non-clinical AI guide that responds to what you share, not what it thinks you should feel.</p>
+    <div class="step-card fade-up" style="transition-delay: 0.1s">
+      <div class="step-number">02</div>
+      <div class="step-title">Reflect with Wren</div>
+      <p class="step-desc">Wren, our AI guide, answers with a short, gentle reflection on what you shared. Read it, or tap to hear it read aloud. Not advice, just a space to be heard.</p>
+      <p class="step-try">Try it: send one sentence and see what Wren notices.</p>
     </div>
-    <div class="feature-item fade-up" style="transition-delay: 0.1s">
-      <div class="feature-icon">📊</div>
-      <div class="feature-title">Insights</div>
-      <p class="feature-desc">Weekly emotional patterns, most common feelings, and the moments you carry the most weight.</p>
+    <div class="step-card fade-up" style="transition-delay: 0.2s">
+      <div class="step-number">03</div>
+      <div class="step-title">Try a calm exercise</div>
+      <p class="step-desc">Breathing, a body scan, or a grounding practice, for when you need to settle before you go on with your day.</p>
+      <p class="step-try">Try it: pick one and notice how you feel afterward.</p>
     </div>
-    <div class="feature-item fade-up" style="transition-delay: 0.15s">
-      <div class="feature-icon">📓</div>
-      <div class="feature-title">Journal</div>
-      <p class="feature-desc">A private space to write freely, separate from your emotional check-ins, always yours.</p>
+    <div class="step-card fade-up" style="transition-delay: 0.3s">
+      <div class="step-number">04</div>
+      <div class="step-title">See what keeps coming up</div>
+      <p class="step-desc">Over time, Insights shows the patterns across your entries: your most common feelings, the themes, and the moments you carry the most weight. When something stands out, a calm exercise can help you find your balance.</p>
+      <p class="step-try">Try it: check back after a few entries.</p>
     </div>
-    <div class="feature-item fade-up" style="transition-delay: 0.2s">
-      <div class="feature-icon">🌬</div>
-      <div class="feature-title">Calm</div>
-      <p class="feature-desc">Breathing exercises, body scans, and grounding practices for when you need to settle.</p>
+  </div>
+  <div class="resources-strip fade-up">
+    <div>
+      <div class="step-title" style="margin-bottom: 0.25rem;">Check out Resources</div>
+      <p class="step-desc">Crisis lines and support services are always one tap away, and always free.</p>
     </div>
-    <div class="feature-item fade-up" style="transition-delay: 0.25s">
-      <div class="feature-icon">🛟</div>
-      <div class="feature-title">Resources</div>
-      <p class="feature-desc">Crisis lines and support services, always one tap away, never buried behind a paywall.</p>
-    </div>
-    <div class="feature-item fade-up" style="transition-delay: 0.3s">
-      <div class="feature-icon">🎙️</div>
-      <div class="feature-title">Speak it, don't type it</div>
-      <p class="feature-desc">Tap to talk instead of typing. Voice works in English today, and other languages are in progress. Your words are transcribed for you to review, and Matters does not save the audio.</p>
-    </div>
-    <div class="feature-item fade-up" style="transition-delay: 0.35s">
-      <div class="feature-icon">🧭</div>
-      <div class="feature-title">More than just heavy or light</div>
-      <p class="feature-desc">An optional feeling pad captures not just how heavy something feels, but which way it's leaning: hard or good.</p>
-    </div>
-    <div class="feature-item fade-up" style="transition-delay: 0.4s">
-      <div class="feature-icon">🔊</div>
-      <div class="feature-title">Hear Wren respond</div>
-      <p class="feature-desc">Prefer listening to reading? Tap to have Wren's reflection read aloud, gently, in your own time.</p>
-    </div>
+    <a href="https://app.thematterscompany.com" class="price-cta ghost">Open Matters</a>
   </div>
 </section>
 
@@ -793,60 +882,6 @@
 
 <div class="divider"></div>
 
-<section class="section" id="safety">
-  <div class="safety-section fade-up">
-    <p class="section-label">Privacy &amp; Safety</p>
-    <h2 class="section-title" style="margin-bottom: 0.5rem;">Your words are yours.</h2>
-    <p class="section-subtitle" style="margin-bottom: 2rem;">We've tried to be straightforward about what we do and don't do with your data.</p>
-    <div class="safety-grid">
-      <div class="safety-item">
-        <div class="safety-dot"></div>
-        <div>
-          <div class="safety-label">Encrypted in our database</div>
-          <p class="safety-desc">Your entries, moods, and reflections are encrypted at rest in our database.</p>
-        </div>
-      </div>
-      <div class="safety-item">
-        <div class="safety-dot"></div>
-        <div>
-          <div class="safety-label">No selling</div>
-          <p class="safety-desc">Your data is never sold to third parties. Your entries exist only for you.</p>
-        </div>
-      </div>
-      <div class="safety-item">
-        <div class="safety-dot"></div>
-        <div>
-          <div class="safety-label">Powered by Anthropic &amp; OpenAI</div>
-          <p class="safety-desc">AI reflections are generated by Anthropic's Claude. The text you send to Wren is sent to Anthropic to write a reply. If you use voice input, your speech is processed by OpenAI to create a text transcript. Matters does not save the audio.</p>
-        </div>
-      </div>
-      <div class="safety-item">
-        <div class="safety-dot"></div>
-        <div>
-          <div class="safety-label">Delete anytime</div>
-          <p class="safety-desc">You can delete your entries or your entire account at any time. When you delete, it's removed from your account. Backups may keep it for a limited time.</p>
-        </div>
-      </div>
-      <div class="safety-item">
-        <div class="safety-dot"></div>
-        <div>
-          <div class="safety-label">Not a therapy service</div>
-          <p class="safety-desc">Matters is a space for private reflection, not a clinical tool. If you're in crisis, please reach out to a professional. Resources are always available in the app.</p>
-        </div>
-      </div>
-      <div class="safety-item">
-        <div class="safety-dot"></div>
-        <div>
-          <div class="safety-label">Working toward more</div>
-          <p class="safety-desc">We're a small team building this carefully. We'll be honest about where we are and transparent when our privacy protections improve.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
 <section class="section" id="faq">
   <p class="section-label">Questions</p>
   <h2 class="section-title">Honest answers.</h2>
@@ -880,6 +915,10 @@
       <div class="faq-a">Not yet. We'll say so here when that changes. Matters is a self-reflection tool, not a substitute for professional care.</div>
     </div>
     <div class="faq-item">
+      <button class="faq-q" onclick="toggleFAQ(this)">Who is Matters for?<span class="faq-chevron">+</span></button>
+      <div class="faq-a">Matters is for adults 18 and older. It is a space for private reflection, not a clinical tool, and Wren is an AI guide, not a therapist.</div>
+    </div>
+    <div class="faq-item">
       <button class="faq-q" onclick="toggleFAQ(this)">Can I use it anonymously?<span class="faq-chevron">+</span></button>
       <div class="faq-a">Yes. You can start using Matters without creating an account. Creating an account lets you save your entries and track patterns over time, but it's always your choice.</div>
     </div>
@@ -889,7 +928,7 @@
 <section class="cta-section">
   <h2 class="cta-title">You don't have to carry it alone.</h2>
   <p class="cta-sub">A quiet space, whenever you need it.</p>
-  <a href="https://app.thematterscompany.com" class="btn-cta">Start for free</a>
+  <a href="https://app.thematterscompany.com" class="btn-cta">Start here</a>
 </section>
 
 <footer>
@@ -920,6 +959,37 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  (function () {
+    const root = document.getElementById('heroCarousel');
+    if (!root) return;
+    const slides = Array.from(root.querySelectorAll('.hero-slide'));
+    const dots = Array.from(document.querySelectorAll('#heroDots .hero-dot'));
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let i = 0, timer = null;
+    function show(n) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((el, k) => { el.classList.toggle('active', k === i); el.setAttribute('aria-hidden', k === i ? 'false' : 'true'); });
+      dots.forEach((el, k) => el.classList.toggle('active', k === i));
+    }
+    function start() { if (reduce || timer) return; timer = setInterval(() => show(i + 1), 6000); }
+    function stop() { clearInterval(timer); timer = null; }
+    dots.forEach((d, k) => d.addEventListener('click', () => { show(k); stop(); start(); }));
+    const hero = root.closest('.hero');
+    hero.addEventListener('mouseenter', stop);
+    hero.addEventListener('mouseleave', start);
+    hero.addEventListener('focusin', stop);
+    hero.addEventListener('focusout', start);
+    let x0 = null;
+    root.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) { show(i + (dx < 0 ? 1 : -1)); stop(); start(); }
+      x0 = null;
+    });
+    document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+    show(0); start();
+  })();
 </script>
 
 <!-- Vercel Web Analytics (enable Analytics in the Vercel dashboard for this project) -->
